@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="timer-style.css">
 </head>
 <body>
-    <div id="timer">
-        <i class="fa-regular fa-clock"></i>
-        <ul type="none">
-            <li><span id="hours">00</span>:</li>
-            <li><span id="minutes">00</span>:</li>
-            <li><span id="seconds">05</span></li>
-        </ul>
-        <button id="timer-start">Старт</button>
+    <div id="container-for-timer">
+        <div id="timer">
+            <i class="fa-regular fa-clock"></i>
+            <ul type="none">
+                <li><span id="hours">00</span>:</li>
+                <li><span id="minutes">00</span>:</li>
+                <li><span id="seconds">05</span></li>
+            </ul>
+            <button id="timer-start">Старт</button>
+            <button id="timer-reset" disabled>Нулиране</button>
+        </div>
     </div>
     <script src="https://kit.fontawesome.com/4ca92add59.js" crossorigin="anonymous"></script>
     <script src="timer.js"></script>

@@ -14,7 +14,7 @@ body {
 
 #timer {
     display: flex;
-    width: 16em;
+    width: 25em;
     border: 2px solid black;
     padding: 0.5em;
     background-color: white;
@@ -38,6 +38,19 @@ body {
     border: none;
     border-radius: 6px;
     background-color: #04AA6D;
+    color: white;
+    display: block;
+    cursor: pointer;
+    padding: 16px;
+    font-size: 16px;
+}
+
+#timer-reset {
+    font-size: 20px;
+    padding: 3px;
+    border: none;
+    border-radius: 6px;
+    background-color: red;
     color: white;
     display: block;
     cursor: pointer;

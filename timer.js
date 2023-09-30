@@ -1,4 +1,5 @@
 let startButtonWasClicked = false;
+let timerReseted = false;
 let timerEnded = false;
 let stopButtonWasClicked = false;
 
@@ -13,31 +14,57 @@ const initialMinute = minutesSpan.textContent;
 const initialSecond = secondsSpan.textContent;
 
 //adding eventListener
+const resetBtn = document.querySelector("#timer-reset");
+resetBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    TimerReset();
+})
 const timerBtn = document.querySelector("#timer-start");
 timerBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
     if(!startButtonWasClicked) {
         TimerStart();
-    } else if(timerEnded) {
-        TimerReset();
     } else {
         TimerStop();
     }
 });
 
-function TimerReset() {
-    document.querySelector("#timer").style.width = "16em";
-    timerBtn.textContent = "Старт"
-    timerBtn.style.backgroundColor = "#04AA6D"
-
+function TimerEnded() {
+    timerBtn.disabled = true;
+    timerBtn.style.opacity = 0.5;
     startButtonWasClicked = false;
-    timerEnded = false;
-    stopButtonWasClicked = false;
+}
 
-    hoursSpan.textContent = initialHour;
-    minutesSpan.textContent = initialMinute;
-    secondsSpan.textContent = initialSecond;
+function TimerReset() {
+    if(!startButtonWasClicked) {
+        timerBtn.disabled = false;;
+        timerBtn.style.opacity = 1;
+        timerBtn.textContent = "Старт"
+        timerBtn.style.backgroundColor = "#04AA6D"
+        resetBtn.style.backgroundColor = "red";
+
+        startButtonWasClicked = false;
+        timerEnded = false;
+        stopButtonWasClicked = false;
+
+        hoursSpan.textContent = initialHour;
+        minutesSpan.textContent = initialMinute;
+        secondsSpan.textContent = initialSecond;
+    } else {
+        timerReseted = true;
+        timerBtn.textContent = "Старт"
+        timerBtn.style.backgroundColor = "#04AA6D"
+        resetBtn.style.backgroundColor = "red";
+
+        startButtonWasClicked = false;
+        timerEnded = false;
+        stopButtonWasClicked = false;
+
+        hoursSpan.textContent = initialHour;
+        minutesSpan.textContent = initialMinute;
+        secondsSpan.textContent = initialSecond;
+    }
 }
 
 function TimerStop() {
@@ -50,6 +77,8 @@ function TimerStart() {
 
     startButtonWasClicked = true;
     timerBtn.textContent = "Спри"
+    resetBtn.disabled  = false;
+    resetBtn.style.backgroundColor = "#04AA6D";
 
     //getting the time
     let hours = Number(hoursSpan.textContent);
@@ -57,8 +86,15 @@ function TimerStart() {
     let seconds = Number(secondsSpan.textContent);
 
     let timeInSeconds = (seconds)+(minutes*60)+(hours*60*60);
-
+    
     let intervalId = setInterval(() => {
+        console.log(timeInSeconds);
+        //checking for reset
+        if(timerReseted) {
+            timerReseted = false;
+            clearInterval(intervalId);
+            return;
+        }
 
         //checking if the timer was paused
         if(stopButtonWasClicked) {
@@ -72,8 +108,7 @@ function TimerStart() {
         
         //checking if the timer ended
         if(timeInSeconds === 0) {
-            timerEnded = true;
-            PostTimerEndActions(timerEnded);
+            TimerEnded();
             clearInterval(intervalId);
         }
         
@@ -124,14 +159,5 @@ function TimerStart() {
             secondsSpan.textContent = seconds.toString();
         }
 
-    }
-
-    function PostTimerEndActions(didTheTimerEnd) {
-        if(didTheTimerEnd) {
-            timerBtn.style.backgroundColor = "red";
-            timerBtn.textContent = "Нулиране";
-            document.querySelector("#timer")
-            .style.width = "18em";
-        }
     }
 }
