@@ -40,7 +40,7 @@ function TimerReset() {
     if(!startButtonWasClicked) {
         timerBtn.disabled = false;;
         timerBtn.style.opacity = 1;
-        timerBtn.textContent = "Старт"
+        timerBtn.textContent = "Start"
         timerBtn.style.backgroundColor = "#04AA6D"
         resetBtn.style.backgroundColor = "red";
 
@@ -53,7 +53,7 @@ function TimerReset() {
         secondsSpan.textContent = initialSecond;
     } else {
         timerReseted = true;
-        timerBtn.textContent = "Старт"
+        timerBtn.textContent = "Start"
         timerBtn.style.backgroundColor = "#04AA6D"
         resetBtn.style.backgroundColor = "red";
 
@@ -70,13 +70,13 @@ function TimerReset() {
 function TimerStop() {
     startButtonWasClicked = false;
     stopButtonWasClicked = true;
-    timerBtn.textContent = "Старт";
+    timerBtn.textContent = "Start";
 }
 
 function TimerStart() {
 
     startButtonWasClicked = true;
-    timerBtn.textContent = "Спри"
+    timerBtn.textContent = "Stop"
     resetBtn.disabled  = false;
     resetBtn.style.backgroundColor = "#04AA6D";
 
