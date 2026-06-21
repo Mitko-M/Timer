@@ -1,4 +1,4 @@
-# Timer-With-Start-Stop-Reset-Buttons
+# Just a simple overcomplicated timer (unfinished)
 
 A simple stop-pause timer with a reset button. If you want to change the hours/minutes/seconds value just change the span text in the HTML file.
 </br>
